@@ -12,8 +12,8 @@ class Solution {
         
         for (int i = 2; i< nums.length; i++){
             
-            int oneSkipRob = nums[i] + houseHeist[i-1] - nums[i-1];
-            int twoSkipRob = nums[i] + houseHeist[i-2];
+            int twoSkipRob = nums[i] + houseHeist[i-1] - nums[i-1];
+            int oneSkipRob = nums[i] + houseHeist[i-2];
             
             if (oneSkipRob > twoSkipRob)
                 houseHeist[i] = oneSkipRob;

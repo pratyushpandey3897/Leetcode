@@ -1,26 +1,21 @@
 import java.util.*;
 class Solution {
+    
     public int rob(int[] nums) {
         
-        if (nums.length == 1)
-            return nums[0];
+        int rob1=0 , rob2 = 0;
         
-        int[] houseHeist = new int[nums.length];
         
-        houseHeist[0] = nums[0];
-        houseHeist[1] = nums[1];
+        // [rob1, rob2, n, n+1, n+2]
         
-        for (int i = 2; i< nums.length; i++){
+        for (int i = 0; i<nums.length; i++){
             
-            int twoSkipRob = nums[i] + houseHeist[i-1] - nums[i-1];
-            int oneSkipRob = nums[i] + houseHeist[i-2];
-            
-            if (oneSkipRob > twoSkipRob)
-                houseHeist[i] = oneSkipRob;
-            else
-                houseHeist[i] = twoSkipRob;
+            int maxRob = Math.max(nums[i]+ rob1, rob2);
+            rob1 =rob2;
+            rob2 =maxRob;
         }
         
-        return (houseHeist[nums.length-1] > houseHeist[nums.length-2] ? houseHeist[nums.length-1]: houseHeist[nums.length-2]);
+        return rob2;
+        
     }
 }

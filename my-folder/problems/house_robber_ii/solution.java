@@ -1,7 +1,6 @@
 class Solution {
     public int rob(int[] nums) {
         
-        
             return Math.max(nums[0], Math.max(robMax(1, nums.length, nums), robMax(0,nums.length-1,nums)));
         
         

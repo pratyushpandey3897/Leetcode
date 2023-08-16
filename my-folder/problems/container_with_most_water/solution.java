@@ -8,7 +8,7 @@ class Solution {
         while (i<j){
 
             int waterCap = (j-i)*Math.min(height[i], height[j]);
-            maxCap = waterCap > maxCap ? waterCap : maxCap;
+            maxCap = Math.max(waterCap, maxCap);
             if (height[j] > height[i]){
                 i++;
             } else if (height[j] < height[i]){

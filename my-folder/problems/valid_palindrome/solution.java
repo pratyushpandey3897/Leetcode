@@ -1,24 +1,39 @@
 class Solution {
     public boolean isPalindrome(String s) {
-        
-        String str = s.replaceAll("[^a-zA-Z0-9]", "").toLowerCase();
-        int j = str.length() -1;
-
-        int left = 0, right = str.length() -1;
-
-        while (left<right){
-            if (str.charAt(left) != str.charAt(right)){
-                    return false;
-            }
-            left++;
-            right--;
+        if (s.isEmpty()) {
+        	return true;
         }
-        // for (int i = 0; i < str.length() -1 ; i++) {
-        //     if (str.charAt(i) != str.charAt(j)){
-        //             return false;
-        //     }
-        //     j--;
-        // }
+        s = s.toLowerCase();
+        int leftptr = 0;
+        int rightptr = s.length()-1;
+
+        
+
+        while (leftptr<= rightptr){
+            if ( !( (s.charAt(leftptr) >= 'a' && s.charAt(leftptr) <= 'z') || (s.charAt(leftptr) >= '0' && s.charAt(leftptr) <= '9') ) ) {
+                System.out.println(leftptr);
+                leftptr++;
+            } 
+            else if ( !( (s.charAt(rightptr) >= 'a' && s.charAt(rightptr) <= 'z') || (s.charAt(rightptr) >= '0' && s.charAt(rightptr) <= '9') ) ) {
+                System.out.println(rightptr);
+                rightptr--;
+            } 
+
+            else {
+if ( s.charAt(rightptr) != s.charAt(leftptr )) {
+
+                System.out.println(s.charAt(leftptr ) + " " + s.charAt(rightptr));
+                return false;
+            }
+
+            leftptr++;
+            rightptr--; 
+            }
+
+            
+            
+
+        }
 
         return true;
     }

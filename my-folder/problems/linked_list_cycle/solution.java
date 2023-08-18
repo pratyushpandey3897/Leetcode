@@ -11,21 +11,18 @@
  */
 public class Solution {
     public boolean hasCycle(ListNode head) {
-        HashMap<Object, Object> map = new HashMap<Object, Object>();
+        Set<Object> map = new HashSet<Object>();
         Boolean cycleFlag = false;
         if (head == null)
             return false;
-        while(!map.containsKey(head)){
-            map.put(head, head.next);
+        while(!map.contains(head)){
+            map.add(head);
             
             head = head.next;
             if (head == null){
-                return cycleFlag;
+                return false;
             }
         }
-        
-        cycleFlag = true;
-        
-        return cycleFlag;
+        return true;
     }
 }

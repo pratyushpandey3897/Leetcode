@@ -1,34 +1,25 @@
 class Solution {
     public int uniquePaths(int m, int n) {
         
-        
+        // bottom up
         
        int [][] arr = new int[m+1][n+1];
 
        arr[1][1] = 1;
        if (m ==1 || n==1)
             return 1;
-    return recurse(m-1, n, arr) + recurse(m,n-1, arr);
+
+        for (int r = 1; r <= m; r++){
+
+            for (int c = 1; c <=n ; c++ ){
+
+                
+                arr[r][c] += arr[r-1][c] + arr[r][c-1];
+            }
+        }
+    return arr[m][n];
         
 
-    }
-
-    public int recurse(int m, int n, int[][] arr){
-
-       
-        if (arr[m][n] != 0)
-            return arr[m][n];
-
-        if (m ==1 || n==1)
-            arr[m][n] = 1;
-        // if (m<=1)
-        //     arr[m][n] = recurse(m,n-1, arr);
-        // else if (n<=1)
-        //     arr[m][n] = recurse(m-1, n, arr);
-        else
-            arr[m][n] = recurse(m-1, n, arr) + recurse(m,n-1, arr);
-
-        return arr[m][n];
     }
 
 

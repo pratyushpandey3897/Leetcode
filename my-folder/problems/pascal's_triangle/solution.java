@@ -1,29 +1,27 @@
 class Solution {
     public List<List<Integer>> generate(int numRows) {
-        List<List<Integer>> list = new ArrayList<>();
-        
-        if(numRows<=0)
-        {
-            return list;
+        List<List<Integer>> ans = new ArrayList<>();
+
+        List<Integer> l = new ArrayList<>();
+        l.add(1);
+        ans.add(l);
+
+        for (int i = 1 ; i< numRows; i++){
+            List<Integer> prev_row = ans.get(i-1);
+            List<Integer> cur_row = new ArrayList<>();
+
+            cur_row.add(1);
+
+            for (int e = 1; e <i ; e ++ ){
+                cur_row.add(prev_row.get(e-1) + prev_row.get(e));
+            }
+
+            cur_row.add(1);
+
+            ans.add(cur_row);
+
         }
-        
-        for(int line = 1; line <= numRows; line++)
-    {
-          
-            List<Integer> l1 = new ArrayList<>();
-    int C=1;// used to represent C(line, i)
-            
-    for(int i = 1; i <= line; i++)
-    { 
-        l1.add(C);
-        // The first value in a line is always 1
-        C = C * (line - i) / i;
-        
-    }
-            list.add(l1);
-    }
-       
-    return list;
-    
+
+        return ans;
     }
 }

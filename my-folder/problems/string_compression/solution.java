@@ -1,34 +1,35 @@
 class Solution {
     public int compress(char[] chars) {
-        
-        
-        int count = 1;
-        String str = "";
-        
-        str+= chars[0];
-        
-        for (int i =1 ; i < chars.length; i++){
-            
-            if (chars[i] == chars[i-1] ){
-                
-                if (i == chars.length-1)
-                    str+= ++count;
-                else
-                    count++;
-               
-            } else{
-                if (count !=1)
-                    str += count;
-                str += chars[i];
-                count = 1;
+        int printptr =0, left = 0;
+
+        for(int i= 0; i< chars.length; i++){
+            if (chars[i] == chars[left]){
+                continue;
+            } else {
+                if (i-left > 1){
+                    chars[printptr++] = chars[left];
+                    char [] intch = String.valueOf(i-left).toCharArray();
+                    for (char c : intch ){
+                        chars[printptr++] = c;
+                    }
+                } else {
+                    chars[printptr++] = chars[left];
+                }
+                left = i;
             }
         }
-        System.out.println(str);
-        
-        for (int i =0; i<str.length() ; i++){
-            chars[i] = str.charAt(i);
-        }
-        
-        return str.length();
+
+        if (chars.length - left > 1){
+                    chars[printptr++] = chars[left];
+                    char [] intch = String.valueOf(chars.length -left).toCharArray();
+                    for (char c : intch ){
+                        chars[printptr++] = c;
+                    }
+                } else {
+                    chars[printptr++] = chars[left];
+                }
+
+        return printptr;
+
     }
 }

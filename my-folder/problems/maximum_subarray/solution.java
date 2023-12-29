@@ -1,24 +1,30 @@
-import java.util.*;
 class Solution {
-    
     public int maxSubArray(int[] nums) {
         
-        int maxSum = nums[0];
-        int max_sum_here = nums[0];
-        
-        for (int i= 1; i< nums.length; i++){
-            int sum = max_sum_here + nums[i];
-            if (sum > nums[i])
-                max_sum_here = sum;
-            else max_sum_here = nums[i];
-            
-            if (max_sum_here > maxSum)
-                maxSum = max_sum_here;
+        // int max = Integer.MIN_VALUE;
+
+        // brute
+        // for (int i = 0; i< nums.length; i ++){
+        //     int currsum = 0;
+        //     for (int j = i; j< nums.length; j++){
+        //         currsum += nums[j];
+        //         max = Math.max(currsum, max);
+        //     }
+        // }
+
+        //kadane
+
+        int currsum = nums[0];
+        int maxsum = nums[0];
+
+        for (int i = 1; i<nums.length;i++){
+
+            int a = nums[i];
+            currsum = Math.max(currsum+a, a);
+            maxsum = Math.max(currsum, maxsum);
         }
-        
-        return maxSum;
-        
-        
+
+
+        return maxsum;
     }
-    
 }

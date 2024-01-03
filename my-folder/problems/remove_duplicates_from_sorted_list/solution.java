@@ -10,24 +10,28 @@
  */
 class Solution {
     public ListNode deleteDuplicates(ListNode head) {
-        
+
+        Set<Integer> s = new HashSet<>();
         if (head == null)
-            return head;
-        ListNode pointer1 = head;
-        ListNode pointer2 =head.next;
+        return head;
+        ListNode currnode = head;
+        s.add(currnode.val);
+        ListNode prevnode = head;
+        currnode = currnode.next;
+        while (currnode != null){
+            if (s.contains(currnode.val))
+            {
+                prevnode.next = currnode.next;
         
-        while (pointer2 != null){
-            if (pointer1.val == pointer2.val){
-                pointer1.next = pointer2.next;
-                pointer2 = pointer2.next;
-            }
-            else {
-                pointer1 = pointer2;
-                pointer2 = pointer2.next;
+            } else {
+                s.add(currnode.val);
+                prevnode = currnode;
             }
             
-        
+            currnode = currnode.next;
         }
+
         return head;
+        
     }
 }

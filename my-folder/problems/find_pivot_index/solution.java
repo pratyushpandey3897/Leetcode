@@ -1,21 +1,20 @@
 class Solution {
     public int pivotIndex(int[] nums) {
-        
-        int lSum =0, rSum = 0;
-        
-        // calculate the total sum and consider it as right sum
-        for (int  i = 0; i< nums.length; i ++){
-            rSum += nums[i];
+        int lsum[] = new int [nums.length];
+        int rsum[] = new int [nums.length];
+
+        for (int i=1, j = nums.length-2; i< nums.length && j>=0; i++,j--){
+            lsum[i] = lsum[i-1] + nums[i-1];
+            rsum[j] = rsum[j+1] + nums[j+1];
+
         }
-            
-        for (int i= 0; i< nums.length; i++){
-            
-            rSum -= nums[i];
-            if (lSum == rSum)
+
+        for (int i = 0;i < nums.length; i++){
+            if (lsum[i] == rsum[i])
                 return i;
-            lSum += nums[i];
         }
-        
+
         return -1;
+        
     }
 }

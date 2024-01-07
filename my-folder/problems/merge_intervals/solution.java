@@ -1,32 +1,30 @@
 class Solution {
     public int[][] merge(int[][] intervals) {
-        
+        List<int[]> l = new ArrayList<>();
+        Arrays.sort(intervals, (a,b)-> a[0]-b[0]);
 
-        List<int[]> mergedVal = new ArrayList<int[]>();
-        
-        Arrays.sort(intervals, Comparator.comparingInt(o -> o[0]));
-        int latestStartTime = intervals[0][0];
-        int latestFinishTime = intervals[0][1];
-        int mergerdValIndex = 0;
-        
-        mergedVal.add(new int[]{latestStartTime, latestFinishTime});
-        for(int i =1; i<intervals.length; i++){
-           if (intervals[i][0] <= latestFinishTime) { // overlap'
-              mergedVal.set(mergerdValIndex, new int[]{latestStartTime, Math.max(intervals[i][1], latestFinishTime)});
-              latestFinishTime = mergedVal.get(mergerdValIndex)[1];
-           } else { // non overlap
-               mergedVal.add(new int[]{intervals[i][0], intervals[i][1]});
-               latestFinishTime = intervals[i][1];
-               latestStartTime = intervals[i][0];
-               mergerdValIndex++;
-           }
+        int lstart = intervals[0][0];
+        int lend = intervals[0][1];
+        int idx = 0;
+        l.add(new int[]{lstart,lend});
+
+        for (int i =1; i<intervals.length; i++){
+            if (intervals[i][0] <= lend){
+                lend = Math.max(intervals[i][1], lend);
+                l.set(idx, new int[]{lstart,lend});
+                
+            } else {
+                lstart = intervals[i][0];
+                lend = intervals[i][1];
+                idx++;
+                l.add(new int[]{lstart,lend});
+            }
         }
-        
-        int [][] m = new int[mergedVal.size()][2];
-        for (int i =0; i< mergedVal.size(); i++){
-            m[i] = mergedVal.get(i);
+
+        int [][] ans = new int[l.size()][];
+        for (int i =0 ; i< l.size(); i++ ){
+            ans[i] = l.get(i);
         }
-        
-        return m;
+        return ans;
     }
 }

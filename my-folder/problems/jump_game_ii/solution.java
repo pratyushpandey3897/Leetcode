@@ -6,14 +6,14 @@ class Solution {
         
         for (int i = 0; i<nums.length-1; i++){
             
-            if (nums[i] + i > maxJump){
-                maxJump = nums[i]+i;
-            }
+            maxJump = Math.max(nums[i]+i, maxJump);
             
             if (i == position){
                 position = maxJump; // we jump to the maximium tile we can
                 jump++;
             }
+            if (position == nums.length-1)
+                return jump;
         }
         
         return jump;

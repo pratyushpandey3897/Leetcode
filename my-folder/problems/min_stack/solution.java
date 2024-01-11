@@ -1,30 +1,26 @@
 class MinStack {
-    List<Integer> mainQ;
-    List<Integer> minQ;
+    List<Integer[]> minQ;
     public MinStack() {
-        mainQ = new LinkedList<>();
         minQ = new LinkedList<>();
     }
     
     public void push(int val) {
-        // at any tiem maintain the original stack
-        mainQ.add(val);
 
         // in the min stack for every element added, add the minimum at that position
-        minQ.add (Math.min (val, (minQ.size() == 0 ? val : minQ.get(minQ.size()-1) ) ) );
+        minQ.add (new Integer[]{val, Math.min (val, (minQ.size() == 0 ? val : minQ.get(minQ.size()-1)[1] ) ) } );
     }
     
     public void pop() {
         minQ.remove(minQ.size()-1);
-        mainQ.remove(mainQ.size()-1);
+        // mainQ.remove(mainQ.size()-1);
     }
     
     public int top() {
-        return mainQ.get(mainQ.size()-1);
+        return minQ.get(minQ.size()-1)[0];
     }
     
     public int getMin() {
-        return minQ.get(minQ.size()-1);
+        return minQ.get(minQ.size()-1)[1];
     }
 }
 
